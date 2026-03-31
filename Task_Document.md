@@ -45,7 +45,7 @@ Choose one of the following options:
 
 ## Task Breakdown
 
-Make sure to 
+Make sure to only do task based on the numebr assigned to u in the excel sheet
 
 ### Task 1: GPS Reading
 
@@ -142,7 +142,7 @@ Set up and run a basic rover simulation workflow using ROS 2 and Gazebo.
 - Rover URDF file
 - Mesh package containing STL files referenced by the URDF
 
-## Core Tasks (Mandatory)
+## Core Tasks (Mandatory to be Done for Everyone)
 1. Spawn the provided rover model in Gazebo and verify that the robot appears correctly.
 2. Configure and run a differential drive controller using `ros2_control`.
 3. Publish odometry and TF transforms correctly so rover motion is reflected
