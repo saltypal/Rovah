@@ -1,7 +1,7 @@
 # CSE_Recruitment
 
 All the submissions will happen through PR sent by you to this repo which will be evaluated
-
+Make Sure to add your names for identification
 ---
 Please refer to the following **rules** as any violation(s) or noncompliance will result in **negative grading**:
 * Document any and every step throughout your tasks. Refer section Rules.1
