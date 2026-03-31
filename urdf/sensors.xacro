@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--
+  AUTONOMOUS NAVIGATION SENSORS FOR ROCKER-BOGIE ROVER
+  
+  This file defines all sensors needed for autonomous navigation:
+  - Intel RealSense D435i (RGB-D Camera)
+  - Hokuyo UST-10LX (2D LiDAR - 270° wide angle)
+  - Standalone IMU (9-DOF)
+  - RTK-GPS (High-precision positioning)
+  
+  All sensors are attached to base_link with appropriate positioning
+  for optimal coverage and minimal interference.
+-->
+
+<xacro:macro name="sensors_macro" params="parent">
+
+  <!-- ============================================ -->
+  <!-- INTEL REALSENSE D435i RGB-D CAMERA           -->
+  <!-- ============================================ -->
+  
+  <!-- Camera Link (Housing) -->
+  <link name="camera_link">
+    <inertial>
+      <mass value="0.072"/> <!-- 72g actual weight -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" 
+               iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- Actual D435i dimensions: 90mm x 25mm x 25mm -->
+        <box size="0.09 0.025 0.025"/>
+      </geometry>
+      <material name="camera_gray"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.09 0.025 0.025"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Attach camera to front of rover, elevated for better view -->
+  <joint name="camera_joint" type="fixed">
+    <parent link="${parent}"/>
+    <child link="camera_link"/>
+    <origin xyz="0.45 0.15 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Optical frame (ROS convention: Z forward, Y down, X right) -->
+  <link name="camera_optical_frame"/>
+  
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_optical_frame"/>
+    <origin xyz="0 0 0" rpy="0.0707963267948966 0.0 0.0"/>
+  </joint>
+
+  <!-- Camera Depth Optical Frame -->
+  <link name="camera_depth_frame"/>
+  
+  <joint name="camera_depth_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_depth_frame"/>
+    <origin xyz="0 0 0" rpy="0.0707963267948966 0.0 0.0"/>
+  </joint>
+
+
+  <!-- ============================================ -->
+  <!-- HOKUYO UST-10LX 2D LIDAR (270° Wide Angle)   -->
+  <!-- ============================================ -->
+  
+  <link name="laser_link">
+    <inertial>
+      <mass value="0.130"/> <!-- 130g typical weight -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" 
+               iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- Cylindrical shape: 50mm diameter, 70mm height -->
+        <cylinder radius="0.05" length="0.07"/>
+      </geometry>
+      <material name="lidar_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.07"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Mount LiDAR on top center for 360° unobstructed view -->
+  <joint name="laser_joint" type="fixed">
+    <parent link="${parent}"/>
+    <child link="laser_link"/>
+    <origin xyz="0.45 0.05 0.0" rpy="1.54 0 0"/>
+  </joint>
+
+
+  <!-- ============================================ -->
+  <!-- STANDALONE IMU (9-DOF)                       -->
+  <!-- ============================================ -->
+  
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.050"/> <!-- 50g typical -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
+               iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.03 0.03 0.01"/>
+      </geometry>
+      <material name="imu_blue"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.03 0.03 0.01"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Place IMU at center of base_link for accurate orientation -->
+  <joint name="imu_joint" type="fixed">
+    <parent link="${parent}"/>
+    <child link="imu_link"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  </joint>
+
+
+  <!-- ============================================ -->
+  <!-- RTK-GPS (High-Precision Positioning)         -->
+  <!-- ============================================ -->
+  
+  <link name="gps_link">
+    <inertial>
+      <mass value="0.020"/> <!-- 20g typical -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00001" ixy="0.0" ixz="0.0" 
+               iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- GPS antenna: 30mm diameter, 15mm height -->
+        <cylinder radius="0.03" length="0.015"/>
+      </geometry>
+      <material name="gps_green"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.03" length="0.015"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Mount GPS at highest point for best satellite visibility -->
+  <joint name="gps_joint" type="fixed">
+    <parent link="${parent}"/>
+    <child link="gps_link"/>
+    <origin xyz="0.0 0.12 0" rpy="1.54 0 0"/>
+  </joint>
+
+</xacro:macro>
+
+</robot>

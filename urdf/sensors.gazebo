@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--
+  GAZEBO IGNITION FORTRESS SENSOR PLUGINS
+  
+  This file contains all Gazebo sensor plugin configurations for:
+  - Intel RealSense D435i (RGBD Camera)
+  - Hokuyo UST-10LX (2D LiDAR)
+  - IMU Sensor
+  - RTK-GPS Sensor
+  
+  Note: Ignition Fortress uses the gz-sim-sensors-system plugin
+  for all sensor types. Individual sensor configurations are
+  embedded within the <gazebo> tags.
+-->
+
+<!-- ============================================ -->
+<!-- INTEL REALSENSE D435i RGBD CAMERA            -->
+<!-- ============================================ -->
+
+<gazebo reference="camera_link">
+  <!-- RGBD Camera Sensor -->
+  <sensor name="realsense_d435i" type="rgbd_camera">
+    <always_on>1</always_on>
+    <update_rate>30.0</update_rate>
+    <topic>camera</topic>
+    <gz_frame_id>camera_optical_frame</gz_frame_id>
+    <enable_metrics>false</enable_metrics>
+    
+    <camera>
+      <!-- D435i RGB Stream: 1920x1080 @ 30fps -->
+      <!-- Horizontal FOV: 90° = 1.5708 radians -->
+      <horizontal_fov>1.5708</horizontal_fov>
+      
+      <image>
+        <width>1280</width>
+        <height>720</height>
+        <format>R8G8B8</format>
+      </image>
+      
+      <clip>
+        <near>0.1</near>
+        <far>100.0</far>
+      </clip>
+      
+      <distortion>
+        <k1>0.0</k1>
+        <k2>0.0</k2>
+        <k3>0.0</k3>
+        <p1>0.0</p1>
+        <p2>0.0</p2>
+        <center>0.5 0.5</center>
+      </distortion>
+      
+      <!-- Depth camera specific settings -->
+      <depth_camera>
+        <clip>
+          <near>0.3</near>
+          <far>10.0</far>
+        </clip>
+      </depth_camera>
+      
+      <!-- Image noise for realism -->
+      <noise>
+        <type>gaussian</type>
+        <mean>0.0</mean>
+        <stddev>0.007</stddev>
+      </noise>
+    </camera>
+    
+    <visualize>true</visualize>
+  </sensor>
+</gazebo>
+
+
+<!-- ============================================ -->
+<!-- HOKUYO UST-10LX 2D LIDAR                     -->
+<!-- ============================================ -->
+<!-- Specifications:
+     - Range: 0.06m to 10m (60mm to 10,000mm)
+     - Angular Resolution: 0.25° (1081 samples over 270°)
+     - Scan Rate: 40 Hz
+     - Field of View: 270° (-135° to +135°)
+     - Accuracy: ±40mm at 1-10m range
+-->
+<!-- ============================================ -->
+
+<gazebo reference="laser_link">
+  <!-- GPU LiDAR Sensor (Required for Ignition Fortress) -->
+  <sensor name="hokuyo_ust10lx" type="gpu_lidar">
+    <!-- Always active for continuous scanning -->
+    <always_on>true</always_on>
+    
+    <!-- 40 Hz update rate (Hokuyo UST-10LX specification) -->
+    <update_rate>40.0</update_rate>
+    
+    <!-- Ignition topic (bridged to ROS /scan by ros_gz_bridge) -->
+    <topic>scan</topic>
+    
+    <!-- Frame ID for ROS integration -->
+    <gz_frame_id>laser_link</gz_frame_id>
+    
+    <!-- VISUALIZE RAYS IN GAZEBO SIMULATION (blue rays) -->
+    <visualize>true</visualize>
+    
+    <!-- LiDAR Configuration using <ray> for proper visualization -->
+    <ray>
+      <scan>
+        <!-- HORIZONTAL SCAN PLANE -->
+        <horizontal>
+          <!-- 270° FOV: -135° to +135° -->
+          <!-- 0.25° angular resolution = 1081 samples -->
+          <samples>1081</samples>
+          
+          <!-- Resolution: 1.0 = no subsampling -->
+          <resolution>1</resolution>
+          
+          <!-- Scan angles in radians -->
+          <min_angle>-2.35619449</min_angle>
+          <max_angle>2.35619449</max_angle>
+        </horizontal>
+        
+        <!-- VERTICAL (2D LiDAR = single horizontal plane) -->
+        <vertical>
+          <samples>1</samples>
+          <resolution>1</resolution>
+          <min_angle>0</min_angle>
+          <max_angle>0</max_angle>
+        </vertical>
+      </scan>
+      
+      <!-- RANGE CONFIGURATION -->
+      <range>
+        <!-- Minimum range: 60mm (Hokuyo UST-10LX spec) -->
+        <min>0.06</min>
+        
+        <!-- Maximum range: 10m (Hokuyo UST-10LX spec) -->
+        <max>10.0</max>
+        
+        <!-- Range resolution: 10mm -->
+        <resolution>0.01</resolution>
+      </range>
+      
+      <!-- GAUSSIAN NOISE (realistic ±40mm at 1-10m) -->
+      <noise>
+        <type>gaussian</type>
+        <mean>0.0</mean>
+        <stddev>0.04</stddev>
+      </noise>
+    </ray>
+  </sensor>
+</gazebo>
+
+
+<!-- ============================================ -->
+<!-- STANDALONE IMU SENSOR                        -->
+<!-- ============================================ -->
+
+<gazebo reference="imu_link">
+  <sensor name="imu_sensor" type="imu">
+    <always_on>1</always_on>
+    <update_rate>100.0</update_rate>
+    <topic>imu</topic>
+    <enable_metrics>false</enable_metrics>
+    
+    <imu>
+      <!-- Angular Velocity (Gyroscope) -->
+      <angular_velocity>
+        <x>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>2e-4</stddev>
+            <bias_mean>0.0000075</bias_mean>
+            <bias_stddev>0.0000008</bias_stddev>
+          </noise>
+        </x>
+        <y>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>2e-4</stddev>
+            <bias_mean>0.0000075</bias_mean>
+            <bias_stddev>0.0000008</bias_stddev>
+          </noise>
+        </y>
+        <z>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>2e-4</stddev>
+            <bias_mean>0.0000075</bias_mean>
+            <bias_stddev>0.0000008</bias_stddev>
+          </noise>
+        </z>
+      </angular_velocity>
+      
+      <!-- Linear Acceleration (Accelerometer) -->
+      <linear_acceleration>
+        <x>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>1.7e-2</stddev>
+            <bias_mean>0.1</bias_mean>
+            <bias_stddev>0.001</bias_stddev>
+          </noise>
+        </x>
+        <y>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>1.7e-2</stddev>
+            <bias_mean>0.1</bias_mean>
+            <bias_stddev>0.001</bias_stddev>
+          </noise>
+        </y>
+        <z>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>1.7e-2</stddev>
+            <bias_mean>0.1</bias_mean>
+            <bias_stddev>0.001</bias_stddev>
+          </noise>
+        </z>
+      </linear_acceleration>
+    </imu>
+    
+    <visualize>false</visualize>
+  </sensor>
+</gazebo>
+
+
+<!-- ============================================ -->
+<!-- NAVSAT GPS SENSOR (Ignition Fortress)       -->
+<!-- ============================================ -->
+<!-- For Ignition Fortress, NavSat sensor is defined here -->
+<!-- System plugin is in world file (gz-sim-navsat-system) -->
+<!-- No ROS plugin needed - ros_gz_bridge handles ROS 2 -->
+<!-- ============================================ -->
+
+<gazebo reference="gps_link">
+  <sensor name="gps_sensor" type="navsat">
+    <!-- Always on for continuous GPS readings -->
+    <always_on>true</always_on>
+    
+    <!-- Update rate: 10 Hz (standard GPS update rate) -->
+    <update_rate>10.0</update_rate>
+    
+    <!-- Ignition topic (bridged to ROS /gps/fix by ros_gz_bridge) -->
+    <topic>gps</topic>
+    
+    <!-- NavSat-specific configuration -->
+    <!-- NOTE: Noise values are in DEGREES for position, m/s for velocity -->
+    <!-- 1 degree latitude ≈ 111,320 meters, so: -->
+    <!-- 0.02m / 111320 ≈ 1.8e-7 degrees for 2cm accuracy -->
+    <!-- 0.03m / 111320 ≈ 2.7e-7 degrees for 3cm accuracy -->
+    <navsat>
+      <!-- Position sensing with noise for realism -->
+      <position_sensing>
+        <horizontal>
+          <!-- RTK-GPS horizontal accuracy: ±2cm = 1.8e-7 degrees -->
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.00000002</stddev>
+          </noise>
+        </horizontal>
+        <vertical>
+          <!-- RTK-GPS vertical accuracy: ±3cm (in meters for altitude) -->
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.03</stddev>
+          </noise>
+        </vertical>
+      </position_sensing>
+      
+      <!-- Velocity sensing with noise (in m/s) -->
+      <velocity_sensing>
+        <horizontal>
+          <!-- Velocity accuracy: ±0.01 m/s -->
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </horizontal>
+        <vertical>
+          <noise type="gaussian">
+            <mean>0.0</mean>
+            <stddev>0.003</stddev>
+          </noise>
+        </vertical>
+      </velocity_sensing>
+    </navsat>
+    
+    <!-- Don't visualize GPS sensor in GUI -->
+    <visualize>false</visualize>
+  </sensor>
+</gazebo>
+
+<!-- ============================================ -->
+<!-- POSE PUBLISHER PLUGIN (for NavSat)          -->
+<!-- ============================================ -->
+<!-- Publishes model pose for NavSat to convert to GPS coordinates -->
+<gazebo>
+  <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+    <publish_link_pose>true</publish_link_pose>
+    <publish_sensor_pose>true</publish_sensor_pose>
+    <publish_collision_pose>false</publish_collision_pose>
+    <publish_visual_pose>false</publish_visual_pose>
+    <publish_nested_model_pose>true</publish_nested_model_pose>
+    <update_frequency>10</update_frequency>
+  </plugin>
+</gazebo>
+
+</robot>

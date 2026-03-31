@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="forest">
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.8 0.9 1</background>
+      <shadows>true</shadows>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+    </scene>
+
+    <physics name="ode_physics" default="true" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <gravity>0 0 -9.81</gravity>  <!-- Earth Gravity -->
+    </physics>
+
+    <!-- Spherical coordinates for GPS (Forest location - Pacific Northwest) -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.6062</latitude_deg>
+      <longitude_deg>-122.3321</longitude_deg>
+      <elevation>50.0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+
+    <!-- Plugins -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"></plugin>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"></plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"></plugin>
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"></plugin>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"></plugin>
+    <plugin filename="ignition-gazebo-navsat-system" name="ignition::gazebo::systems::NavSat"></plugin>
+
+    <!-- Sun -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 100 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Forest terrain with heightmap (SINGLE TERRAIN ONLY) -->
+    <include>
+      <uri>model://terrain</uri>
+      <name>forest_terrain</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- Rock formations for forest floor -->
+    <include>
+      <uri>model://rockformation</uri>
+      <name>rock_formation_1</name>
+      <pose>10 10 3 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://rockformation</uri>
+      <name>rock_formation_2</name>
+      <pose>-15 20 3 0 0 1.2</pose>
+    </include>
+
+    <!-- Scattered rocks -->
+    <include>
+      <uri>model://rock9</uri>
+      <name>forest_rock_1</name>
+      <pose>5 -8 3 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://rock9</uri>
+      <name>forest_rock_2</name>
+      <pose>-8 -12 3 0 0 0.7</pose>
+    </include>
+
+    <include>
+      <uri>model://jaggedrock</uri>
+      <name>jagged_rock_1</name>
+      <pose>18 -5 3 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://jaggedrock</uri>
+      <name>jagged_rock_2</name>
+      <pose>-20 -8 3 0 0 1.5</pose>
+    </include>
+
+  </world>
+</sdf>

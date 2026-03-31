@@ -1,0 +1,160 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="mars">
+    <scene>
+      <background>0.792 0.588 0.259 1.0</background>
+      <ambient>0.6 0.4 0.3 1</ambient>
+      <shadows>true</shadows>
+    </scene>
+
+    <physics name="ode_physics" default="true" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <gravity>0 0 -3.711</gravity>  <!-- Martian Gravity (38% of Earth) -->
+    </physics>
+
+    <!-- Spherical coordinates for GPS (Mars location - Jezero Crater) -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>18.4447</latitude_deg>
+      <longitude_deg>77.4508</longitude_deg>
+      <elevation>0.0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+
+    <!-- Plugins -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"></plugin>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"></plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"></plugin>
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"></plugin>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"></plugin>
+    <plugin filename="ignition-gazebo-navsat-system" name="ignition::gazebo::systems::NavSat"></plugin>
+
+    <!-- Directional Light (Sun) -->
+    <light type="directional" name="sun">
+      <pose>0 0 100 0 0 0</pose>
+      <diffuse>0.8 0.6 0.5 1</diffuse>
+      <specular>0.5 0.4 0.3 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+      <cast_shadows>true</cast_shadows>
+    </light>
+
+    <!-- Mars Terrain (multiple sections) -->
+    <include>
+      <uri>model://mars_terrain</uri>
+      <name>terrain</name>
+      <pose>2 1 -.75 0 0 -1.575</pose>
+    </include>
+
+    <include>
+      <uri>model://mars_terrain</uri>
+      <name>terrain1</name>
+      <pose>-22.869 -11.08 -.75 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://mars_terrain</uri>
+      <name>terrain2</name>
+      <pose>-21 13.09 -.70 .01 0 0</pose>
+    </include>
+
+    <!-- Rock Formations -->
+    <include>
+      <uri>model://rockformation</uri>
+      <name>rockformation</name>
+      <pose>1 -9 -0.65 0 0 1.75</pose>
+    </include>
+
+    <include>
+      <uri>model://rockformation</uri>
+      <name>rockformation2</name>
+      <pose>-1 4 -0.5 3.141593 -0.008 1.7915</pose>
+    </include>
+
+    <include>
+      <uri>model://rockformation</uri>
+      <name>rockformation3</name>
+      <pose>10.401 4.11 -0.65 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://rockformation</uri>
+      <name>rockformation4</name>
+      <pose>-18.77 -9.72 -0.75 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://rockformation</uri>
+      <name>rockformation5</name>
+      <pose>-29.2 -2.79 -0.6 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://rockformation</uri>
+      <name>rockformation7</name>
+      <pose>-17.39 2.28 -0.9 0 0 -0.2</pose>
+    </include>
+
+    <!-- Jagged Rocks -->
+    <include>
+      <uri>model://jaggedrock</uri>
+      <name>jaggedrock</name>
+      <pose>5 7 -0.75 0 0 -0.7</pose>
+    </include>
+
+    <include>
+      <uri>model://jaggedrock</uri>
+      <name>jaggedrock2</name>
+      <pose>-9 1 -1 -0.2499 0 -2.399</pose>
+    </include>
+
+    <include>
+      <uri>model://jaggedrock</uri>
+      <name>jaggedrock3</name>
+      <pose>-33.515 -5 -.85 0 0 2.4</pose>
+    </include>
+
+    <!-- Rock9 Models -->
+    <include>
+      <uri>model://rock9</uri>
+      <name>rock9</name>
+      <pose>-4.844 19.6 0 1.05 .6 0</pose>
+    </include>
+
+    <include>
+      <uri>model://rock9</uri>
+      <name>rock9_1</name>
+      <pose>1.849 23.56 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://rock9</uri>
+      <name>rock9_2</name>
+      <pose>-39.766 -19.65 -0.4 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://rock9</uri>
+      <name>rock9_3</name>
+      <pose>-38.024 6.469 -2 0 0 -1.7</pose>
+    </include>
+
+    <include>
+      <uri>model://rock9</uri>
+      <name>rock9_4</name>
+      <pose>-8.1 -8.18 -2.85 0 0 .85</pose>
+    </include>
+
+    <!-- Crater -->
+    <include>
+      <uri>model://crater</uri>
+      <name>crater</name>
+      <pose>-48.502 1.5 -2.1 0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>

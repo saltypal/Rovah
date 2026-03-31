@@ -1,0 +1,193 @@
+<?xml version="1.0" ?>
+<robot name="mini_model" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<xacro:property name="body_color" value="Gazebo/Silver" />
+
+<!-- Ignition Gazebo plugins -->
+<gazebo>
+  <!-- Joint State Publisher - publishes joint positions and velocities -->
+  <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher">
+    <joint_name>Revolute 25</joint_name>
+    <joint_name>Revolute 26</joint_name>
+    <joint_name>Revolute 27</joint_name>
+    <joint_name>Revolute 28</joint_name>
+    <joint_name>Revolute 29</joint_name>
+    <joint_name>Revolute 30</joint_name>
+    <joint_name>Revolute 31</joint_name>
+    <joint_name>Revolute 32</joint_name>
+    <joint_name>Revolute 33</joint_name>
+    <joint_name>Revolute 34</joint_name>
+    <joint_name>Revolute 35</joint_name>
+    <joint_name>Revolute 36</joint_name>
+    <joint_name>Revolute 37</joint_name>
+    <joint_name>Revolute 38</joint_name>
+  </plugin>
+  
+  <!-- Joint Position Controllers - separate instance for each steering joint -->
+  <plugin filename="libignition-gazebo-joint-position-controller-system.so" name="ignition::gazebo::systems::JointPositionController">
+    <joint_name>Revolute 27</joint_name>  <!-- Rear Right Steering -->
+    <topic>/model/mini_model/joint/Revolute_27/0/cmd_pos</topic>
+  </plugin>
+  
+  <plugin filename="libignition-gazebo-joint-position-controller-system.so" name="ignition::gazebo::systems::JointPositionController">
+    <joint_name>Revolute 28</joint_name>  <!-- Front Right Steering -->
+    <topic>/model/mini_model/joint/Revolute_28/0/cmd_pos</topic>
+  </plugin>
+  
+  <plugin filename="libignition-gazebo-joint-position-controller-system.so" name="ignition::gazebo::systems::JointPositionController">
+    <joint_name>Revolute 34</joint_name>  <!-- Front Left Steering -->
+    <topic>/model/mini_model/joint/Revolute_34/0/cmd_pos</topic>
+  </plugin>
+  
+  <plugin filename="libignition-gazebo-joint-position-controller-system.so" name="ignition::gazebo::systems::JointPositionController">
+    <joint_name>Revolute 35</joint_name>  <!-- Rear Left Steering -->
+    <topic>/model/mini_model/joint/Revolute_35/0/cmd_pos</topic>
+  </plugin>
+  
+  <!-- Joint Velocity Controllers - separate instance for each drive wheel -->
+  <plugin filename="libignition-gazebo-joint-controller-system.so" name="ignition::gazebo::systems::JointController">
+    <joint_name>Revolute 29</joint_name>  <!-- Rear Right Drive -->
+    <topic>/model/mini_model/joint/Revolute_29/cmd_vel</topic>
+  </plugin>
+  
+  <plugin filename="libignition-gazebo-joint-controller-system.so" name="ignition::gazebo::systems::JointController">
+    <joint_name>Revolute 30</joint_name>  <!-- Middle Right Drive -->
+    <topic>/model/mini_model/joint/Revolute_30/cmd_vel</topic>
+  </plugin>
+  
+  <plugin filename="libignition-gazebo-joint-controller-system.so" name="ignition::gazebo::systems::JointController">
+    <joint_name>Revolute 31</joint_name>  <!-- Front Right Drive -->
+    <topic>/model/mini_model/joint/Revolute_31/cmd_vel</topic>
+  </plugin>
+  
+  <plugin filename="libignition-gazebo-joint-controller-system.so" name="ignition::gazebo::systems::JointController">
+    <joint_name>Revolute 36</joint_name>  <!-- Front Left Drive -->
+    <topic>/model/mini_model/joint/Revolute_36/cmd_vel</topic>
+  </plugin>
+  
+  <plugin filename="libignition-gazebo-joint-controller-system.so" name="ignition::gazebo::systems::JointController">
+    <joint_name>Revolute 37</joint_name>  <!-- Middle Left Drive -->
+    <topic>/model/mini_model/joint/Revolute_37/cmd_vel</topic>
+  </plugin>
+  
+  <plugin filename="libignition-gazebo-joint-controller-system.so" name="ignition::gazebo::systems::JointController">
+    <joint_name>Revolute 38</joint_name>  <!-- Rear Left Drive -->
+    <topic>/model/mini_model/joint/Revolute_38/cmd_vel</topic>
+  </plugin>
+  
+  <!-- Pose Publisher for robot localization -->
+  <plugin filename="libignition-gazebo-pose-publisher-system.so" name="ignition::gazebo::systems::PosePublisher">
+    <publish_link_pose>true</publish_link_pose>
+    <use_pose_vector_msg>true</use_pose_vector_msg>
+    <static_publisher>true</static_publisher>
+    <static_update_frequency>1</static_update_frequency>
+  </plugin>
+</gazebo>
+
+<gazebo reference="base_link">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="component__8__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__1__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__2__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__3__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__4__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__5__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__6__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__7__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__9__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__11__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__10__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__14__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__13__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+<gazebo reference="component__12__1">
+  <material>${body_color}</material>
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <self_collide>true</self_collide>
+</gazebo>
+
+</robot>
