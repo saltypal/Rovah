@@ -1,0 +1,18 @@
+# Ignore everything by default
+*
+!*/
+
+# Whitelist micro-ROS Agent logs
+!Category\ 1/
+!Category\ 1/microros_src/
+!Category\ 1/microros_src/micro-ROS-Agent/
+!Category\ 1/microros_src/micro-ROS-Agent/log/**
+
+# Whitelist Teensy GPS src and platformio.ini
+!Category\ 1/Teensy_GPS/
+!Category\ 1/Teensy_GPS/src/
+!Category\ 1/Teensy_GPS/src/**
+!Category\ 1/Teensy_GPS/platformio.ini
+
+# Keep .gitignore tracked
+!.gitignore
