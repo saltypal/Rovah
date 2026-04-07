@@ -3,6 +3,8 @@
 
 <xacro:include filename="$(find mini_model_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find mini_model_description)/urdf/mini_model.trans" />
+<xacro:include filename="$(find mini_model_description)/urdf/sensors.xacro" />
+<xacro:include filename="$(find mini_model_description)/urdf/sensors.gazebo" />
 
 
 <xacro:include filename="$(find mini_model_description)/urdf/mini_model.ignition.gazebo" />
@@ -16,14 +18,14 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -38,14 +40,14 @@
   <visual>
     <origin xyz="-0.0 -0.0 -0.25" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__8__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__8__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.0 -0.0 -0.25" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__8__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__8__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -59,14 +61,14 @@
   <visual>
     <origin xyz="0.25 0.066987 -0.29" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__1__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__1__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0.25 0.066987 -0.29" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__1__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__1__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -80,14 +82,14 @@
   <visual>
     <origin xyz="0.5 0.149321 -0.3" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__2__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__2__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0.5 0.149321 -0.3" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__2__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__2__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -101,14 +103,14 @@
   <visual>
     <origin xyz="-0.5 0.149321 -0.28" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__3__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__3__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.5 0.149321 -0.28" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__3__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__3__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -122,14 +124,14 @@
   <visual>
     <origin xyz="0.5 0.283975 -0.31" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__4__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__4__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0.5 0.283975 -0.31" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__4__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__4__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -143,14 +145,14 @@
   <visual>
     <origin xyz="0.0 0.283975 -0.31" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__5__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__5__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0.0 0.283975 -0.31" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__5__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__5__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -164,14 +166,14 @@
   <visual>
     <origin xyz="-0.5 0.283975 -0.29" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__6__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__6__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.5 0.283975 -0.29" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__6__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__6__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -185,14 +187,14 @@
   <visual>
     <origin xyz="-0.0 -0.0 0.25" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__7__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__7__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.0 -0.0 0.25" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__7__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__7__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -206,14 +208,14 @@
   <visual>
     <origin xyz="0.25 0.066987 0.29" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__9__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__9__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0.25 0.066987 0.29" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__9__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__9__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -227,14 +229,14 @@
   <visual>
     <origin xyz="-0.5 0.149321 0.28" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__11__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__11__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.5 0.149321 0.28" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__11__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__11__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -248,14 +250,14 @@
   <visual>
     <origin xyz="0.5 0.149321 0.3" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__10__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__10__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0.5 0.149321 0.3" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__10__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__10__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -269,14 +271,14 @@
   <visual>
     <origin xyz="-0.5 0.283975 0.29" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__14__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__14__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.5 0.283975 0.29" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__14__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__14__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -290,14 +292,14 @@
   <visual>
     <origin xyz="0.0 0.283975 0.31" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__13__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__13__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0.0 0.283975 0.31" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__13__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__13__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -311,14 +313,14 @@
   <visual>
     <origin xyz="0.5 0.283975 0.31" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__12__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__12__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0.5 0.283975 0.31" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find mini_model_description)/meshes/component__12__1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://mini_model_description/meshes/component__12__1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -428,5 +430,7 @@
   <child link="component__12__1"/>
   <axis xyz="0.0 0.0 -1.0"/>
 </joint>
+
+<xacro:sensors_macro parent="base_link"/>
 
 </robot>
