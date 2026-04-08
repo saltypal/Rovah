@@ -1,0 +1,14 @@
+[Unit]
+Description=Telemetry Logging Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 /mnt/d/Bunker/BaseCamp/Robotics/Rovah/Category3/telemetry_logger.py
+WorkingDirectory=/mnt/d/Bunker/BaseCamp/Robotics/Rovah/Category3
+Environment=PYTHONUNBUFFERED=1
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=ground-control.target

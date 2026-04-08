@@ -1,0 +1,15 @@
+[Unit]
+Description=ROS2 Bridge Service
+After=network-online.target telemetry.service
+Wants=network-online.target
+Requires=telemetry.service
+
+[Service]
+ExecStart=/usr/bin/python3 /mnt/d/Bunker/BaseCamp/Robotics/Rovah/Category3/ros2_bridge.py
+WorkingDirectory=/mnt/d/Bunker/BaseCamp/Robotics/Rovah/Category3
+Environment=PYTHONUNBUFFERED=1
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=ground-control.target

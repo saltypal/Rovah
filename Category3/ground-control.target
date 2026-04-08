@@ -1,0 +1,7 @@
+[Unit]
+Description=Rover Ground Control System
+After=network-online.target
+Wants=network-online.target
+
+[Install]
+WantedBy=multi-user.target
