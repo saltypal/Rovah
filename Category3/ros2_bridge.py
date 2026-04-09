@@ -89,9 +89,8 @@ class ROS2Bridge:
     def start(self):
         """Start bridge polling."""
         self.running = True
-        thread = threading.Thread(target=self.poll_and_relay, daemon=True)
-        thread.start()
         print("[ROS2 Bridge] Started")
+        self.poll_and_relay()
 
     def stop(self):
         """Stop bridge."""
@@ -101,11 +100,9 @@ class ROS2Bridge:
 
 if __name__ == "__main__":
     bridge = ROS2Bridge()
-    bridge.start()
 
     try:
-        while True:
-            time.sleep(1)
+        bridge.start()
     except KeyboardInterrupt:
         print("\n[ROS2 Bridge] Shutting down...")
         bridge.stop()

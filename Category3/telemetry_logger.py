@@ -3,9 +3,7 @@ Telemetry Logger - Listens on socket (port 5001) for log requests
 Writes to log.txt
 """
 import json
-import time
 import socket
-import threading
 from pathlib import Path
 
 
@@ -61,9 +59,8 @@ class TelemetryLogger:
     def start(self):
         """Start the logger listening on socket"""
         self.running = True
-        thread = threading.Thread(target=self.socket_listen, daemon=False)
-        thread.start()
         print("[Telemetry] Started")
+        self.socket_listen()
     
     def stop(self):
         """Stop the logger"""
@@ -75,11 +72,9 @@ class TelemetryLogger:
 
 if __name__ == "__main__":
     logger = TelemetryLogger()
-    logger.start()
     
     try:
-        while True:
-            time.sleep(1)
+        logger.start()
     except KeyboardInterrupt:
         print("\n[Telemetry] Shutting down...")
         logger.stop()
