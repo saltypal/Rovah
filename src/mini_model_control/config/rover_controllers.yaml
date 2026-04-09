@@ -1,0 +1,16 @@
+# Rover Motor Controllers Configuration
+# This is a placeholder config for the Gazebo ROS2 Control Plugin
+
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+# Placeholder for future motor controllers
+# TODO: Add actual motor control configurations for:
+# - Front left drive motor
+# - Front right drive motor  
+# - Middle left drive motor
+# - Middle right drive motor
+# - Back left drive motor
+# - Back right drive motor
+# - Rocker bogie steering
